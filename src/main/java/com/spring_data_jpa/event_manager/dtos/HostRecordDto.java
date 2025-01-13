@@ -5,6 +5,6 @@ import java.util.Set;
 import java.util.UUID;
 
 public record HostRecordDto(String name,
-                            String document,
+                            String cpf,
                             Set<UUID> eventIds) {
 }

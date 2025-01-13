@@ -40,7 +40,7 @@ public class HostService {
     public Host createHost(HostRecordDto hostRecordDto){
         Host host = new Host();
         host.setName(hostRecordDto.name());
-        host.setDocument(hostRecordDto.document());
+        host.setCpf(hostRecordDto.cpf());
 //        host.setEvents(eventRepository.findAllById(hostRecordDto.eventIds()).stream().collect(Collectors.toSet()));
 
         return hostRepository.save(host);

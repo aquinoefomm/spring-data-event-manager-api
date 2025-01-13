@@ -39,8 +39,8 @@ public class EventController {
         return ResponseEntity.status(HttpStatus.CREATED).body(eventService.createEvent(eventRecordDto));
     }
 
-    @DeleteMapping
-    public void deleteById(UUID id){
+    @DeleteMapping("/{id}")
+    public void deleteById(@PathVariable UUID id){
         eventService.deleteById(id);
     }
 

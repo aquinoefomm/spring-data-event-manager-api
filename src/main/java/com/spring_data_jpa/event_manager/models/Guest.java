@@ -11,7 +11,6 @@ import org.hibernate.annotations.UuidGenerator;
 import org.hibernate.type.SqlTypes;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -34,8 +33,8 @@ public class Guest {
     @Column(name = "name", nullable = false, unique = false)
     private String name;
 
-    @Column(name = "document", nullable = false, unique = false)
-    private String document;
+    @Column(name = "cpf", nullable = false, unique = true, columnDefinition = "char(11)", length = 11)
+    private String cpf;
 
 
     @ManyToMany(mappedBy = "guests")
