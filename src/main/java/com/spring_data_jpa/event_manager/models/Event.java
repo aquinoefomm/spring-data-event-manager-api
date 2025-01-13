@@ -40,9 +40,9 @@ public class Event {
 
     @ManyToMany
     @JoinTable(
-            name = "event_guest",  // The join table that will hold the many-to-many relationship
-            joinColumns = @JoinColumn(name = "event_id"),  // The foreign key column in the join table for Event
-            inverseJoinColumns = @JoinColumn(name = "guest_id")  // The foreign key column in the join table for Guest
+            name = "event_guest",
+            joinColumns = @JoinColumn(name = "event_id"),
+            inverseJoinColumns = @JoinColumn(name = "guest_id")
     )
     @JsonIgnore
     private Set<Guest> guests = new HashSet<>();
