@@ -39,7 +39,10 @@ public class HostController {
         return ResponseEntity.status(HttpStatus.CREATED).body(hostService.createHost(hostRecordDto));
     }
 
-
+    @DeleteMapping
+    public void deleteById(@PathVariable UUID id){
+        hostService.deleteHost(id);
+    }
 
 
 }

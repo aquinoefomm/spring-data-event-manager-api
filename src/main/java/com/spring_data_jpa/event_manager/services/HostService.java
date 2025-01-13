@@ -48,8 +48,14 @@ public class HostService {
 
 
     @Transactional
-    public void deleteHost(UUID id){
-        hostRepository.deleteById(id);
+    public boolean deleteHost(UUID id){
+
+        if (hostRepository.existsById(id)) {
+            hostRepository.deleteById(id);
+            return true;
+        }
+        return false;
+
     }
 
 }

@@ -35,7 +35,7 @@ public class Event {
     private Date date;
 
     @ManyToOne
-    @JoinColumn(name = "host_id", nullable = false)
+    @JoinColumn(name = "host_id", nullable = true)
     private Host host;
 
     @ManyToMany
