@@ -31,7 +31,7 @@ public class EventController {
         Optional<Event> event = eventService.getEventById(id);
         return event.map(ResponseEntity::ok)
                 .orElseGet(() ->
-                ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+                        ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
     @PostMapping

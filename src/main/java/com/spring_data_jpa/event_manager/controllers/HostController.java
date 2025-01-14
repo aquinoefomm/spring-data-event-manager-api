@@ -33,7 +33,7 @@ public class HostController {
         Optional<Host> host = hostService.getHostById(id);
         return host.map(ResponseEntity::ok)
                 .orElseGet(()->
-        ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+                        ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
     @PostMapping

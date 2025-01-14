@@ -1,6 +1,7 @@
 package com.spring_data_jpa.event_manager.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.annotations.UuidGenerator;
@@ -44,13 +45,13 @@ public class Event implements Serializable {
     @JoinColumn(name = "host_id", nullable = true)
     private Host host;
 
-    @ManyToMany
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "event_guest",
             joinColumns = @JoinColumn(name = "event_id"),
             inverseJoinColumns = @JoinColumn(name = "guest_id")
     )
-    @JsonIgnore
     private Set<Guest> guests = new HashSet<>();
 
 

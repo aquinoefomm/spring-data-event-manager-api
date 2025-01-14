@@ -12,10 +12,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -46,13 +43,15 @@ public class EventService {
         Host host = hostRepository.findById(eventRecordDto.hostId())
                 .orElseThrow(() -> new IllegalArgumentException("Host not found"));
 
-//        Set<Guest> guests = guestRepository.findAllById(eventRecordDto.guestIds());
+        List<Guest> guestList = guestRepository.findAllById(eventRecordDto.guestIds());
+
+        Set<Guest> guests = new HashSet<>(guestList);
 
         Event event = new Event();
         event.setDescription(eventRecordDto.description());
         event.setDate(eventRecordDto.date());
         event.setHost(host);
-//        event.getGuests(guests);
+        event.setGuests(guests);
 
         return eventRepository.save(event);
     }
