@@ -3,8 +3,10 @@ package com.spring_data_jpa.event_manager.controllers;
 import com.spring_data_jpa.event_manager.dtos.GuestRecordDto;
 import com.spring_data_jpa.event_manager.models.Guest;
 import com.spring_data_jpa.event_manager.services.GuestService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -35,7 +37,11 @@ public class GuestController {
     }
 
     @PostMapping
-    public ResponseEntity<Guest> createGuest(@RequestBody GuestRecordDto guestRecordDto){
+    public ResponseEntity<Guest> createGuest(@Valid @RequestBody GuestRecordDto guestRecordDto, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
+
         return ResponseEntity.status(HttpStatus.CREATED).body(guestService.createGuest(guestRecordDto));
     }
 

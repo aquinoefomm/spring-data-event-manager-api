@@ -3,8 +3,10 @@ package com.spring_data_jpa.event_manager.controllers;
 import com.spring_data_jpa.event_manager.dtos.HostRecordDto;
 import com.spring_data_jpa.event_manager.models.Host;
 import com.spring_data_jpa.event_manager.services.HostService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -35,7 +37,11 @@ public class HostController {
     }
 
     @PostMapping
-    public ResponseEntity<Host> createHost(@RequestBody HostRecordDto hostRecordDto){
+    public ResponseEntity<Host> createHost(@Valid @RequestBody HostRecordDto hostRecordDto, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
+
         return ResponseEntity.status(HttpStatus.CREATED).body(hostService.createHost(hostRecordDto));
     }
 

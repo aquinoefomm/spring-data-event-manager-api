@@ -58,6 +58,12 @@ public class EventService {
     }
 
     @Transactional
+    public Event updateEvent(EventRecordDto eventRecordDto){
+//        TODO
+        return null;
+    }
+
+    @Transactional
     public void deleteById(UUID id){
         eventRepository.deleteById(id);
     }

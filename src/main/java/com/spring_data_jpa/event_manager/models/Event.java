@@ -2,23 +2,29 @@ package com.spring_data_jpa.event_manager.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.annotations.UuidGenerator;
 import org.hibernate.type.SqlTypes;
 
+import java.io.Serializable;
 import java.util.*;
 
-@Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
 @Table(name = "event")
-public class Event {
+public class Event implements Serializable {
+
+    private static final long serialVersionUid = 1L;
+
+    public Event(UUID id, String description, Date date, Host host, Set<Guest> guests) {
+        this.id = id;
+        this.description = description;
+        this.date = date;
+        this.host = host;
+        this.guests = guests;
+    }
+
+    public Event() {
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -47,4 +53,44 @@ public class Event {
     @JsonIgnore
     private Set<Guest> guests = new HashSet<>();
 
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public Host getHost() {
+        return host;
+    }
+
+    public void setHost(Host host) {
+        this.host = host;
+    }
+
+    public Set<Guest> getGuests() {
+        return guests;
+    }
+
+    public void setGuests(Set<Guest> guests) {
+        this.guests = guests;
+    }
 }
